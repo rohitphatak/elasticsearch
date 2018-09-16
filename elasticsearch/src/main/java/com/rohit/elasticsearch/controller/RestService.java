@@ -28,17 +28,25 @@ import com.rohit.elasticsearch.model.SearchShowRequest;
 import com.rohit.elasticsearch.model.Show;
 import com.rohit.elasticsearch.service.ShowService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Info;
+import io.swagger.annotations.SwaggerDefinition;
+
 /**
  * @author rohit
  *
  */
 @RestController
 @RequestMapping("/rest/show")
+@Api(value="/rest/show")
+@SwaggerDefinition(info=@Info(description="API for Elasticsearch Implementation", title = "Elasticsearch API", version = "1.0"))
 public class RestService {
 
 	@Autowired
 	private ShowService showService;
 
+	@ApiOperation(value="Search Operation")
 	@PostMapping("/search")
 	public ResponseEntity<List<Show>> search(@RequestBody SearchShowRequest searchShowRequest) {
 		return new ResponseEntity<List<Show>>(showService.search(searchShowRequest),HttpStatus.OK);
